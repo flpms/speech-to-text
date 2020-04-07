@@ -13,19 +13,24 @@ function App() {
     onResult: result => setValue(result)
   })
 
+  const askAndListen = () => {
+    speak({ text: 'Você está se sentindo bem?' });
+    setTimeout(() => listen({ lang: 'pt-BR' }), 2000);
+  }
+
   return (
     <div className="App">
 
-      <div>
-        <button onClick={() => speak({ text: 'Você está se sentindo bem?' })}>Speak</button>
-      </div>
+      <button onClick={ askAndListen }>Perguntar</button>
 
       <div>
         {listening ? "Speak, I'm listening" : ""}
         <textarea 
           value={value}
-          onChange={event => setValue(event.target.value)} />
-        <button onClick={() => listen({ lang: 'pt-BR' }) }>Listen</button>
+          onChange={
+            event => setValue(event.target.value)
+          } />
+          <br/>
         <button onClick={stop}>Stop</button>
       </div>
     </div>
